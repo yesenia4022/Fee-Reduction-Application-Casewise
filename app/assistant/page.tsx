@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import { accountNotFoundEmail } from "@/lib/assistant/email-templates";
 
 type Option = {
   label: string;
@@ -126,22 +127,17 @@ Thank you,
   }
 
   if (answers.account === "unknown") {
-    return {
-      title: "Account Verification Required",
-      explanation:
-        "Confirm the correct Enjoy! Online account before proceeding.",
-      email: `Hello,
+  return {
+    title: "Enjoy! Online Account Verification Required",
 
-Thank you for submitting your Fee Reduction Application.
+    explanation:
+      "We were unable to locate the applicant's Enjoy! Online account. " +
+      "Provide account creation instructions or request the email " +
+      "associated with an existing account.",
 
-We are having difficulty locating or verifying your Enjoy! Online account.
-
-Could you please confirm the email address associated with your account?
-
-Thank you,
-`,
-    };
-  }
+    email: accountNotFoundEmail(),
+  };
+}
 
   if (answers.residency === "nonresident" && answers.children === "yes") {
     return {
